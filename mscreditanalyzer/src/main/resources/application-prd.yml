@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: mscreditanalyzer
+
+  rabbitmq:
+    host: ${RABBITMQ_HOST}
+    port: 5672
+    username: guest
+    password: guest
+
+server:
+  port: 0 #Porta 0 ele starta o projeto em uma porta random
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://mscourse-eureka-user:46d4736f921245ab8ae64f96de59b84a@${EUREKA_HOST}:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+mq:
+  queues:
+    cards-issue: cards-issue
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+logging:
+  file:
+    name: ./logs/log-file.log
